@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { initializeTables } from './db/init.js';
@@ -48,6 +49,12 @@ app.use('/api/questions', questionRoutes);
 app.use('/api', teamRoutes); // Single route definition for team routes
 
 app.use(errorHandler);
+
+const uploadDir = join(__dirname, '../uploads');
+if (!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('Created missing uploads folder');
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
