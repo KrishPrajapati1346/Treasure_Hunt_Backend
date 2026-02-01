@@ -17,8 +17,12 @@ dotenv.config();
 const app = express();
 
 // Configure CORS
+// Configure CORS
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',                      // Allows local development
+    'https://treasure-hunt-frontend-uwf7.onrender.com' // Allows your Render frontend
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
